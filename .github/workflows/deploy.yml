@@ -22,11 +22,15 @@ jobs:
       - name: Verify files before deploy
         run: |
           echo "=== Checking index.html title ==="
-          grep -o "<title>.*</title>" index.html
+          grep -o "<title>.*</title>" public/index.html
           echo "=== File size ==="
-          ls -lh index.html
+          ls -lh public/index.html
           echo "=== version.json ==="
-          cat version.json || echo "version.json not found"
+          cat configs/version.json || echo "version.json not found"
+          echo "=== api package.json ==="
+          cat api/api/package.json || echo "api package.json not found"
+          echo "=== staticwebapp.config.json ==="
+          cat configs/staticwebapp.config.json || echo "staticwebapp.config.json not found"
 
       - name: Clean Deploy to Azure Static Web Apps
         uses: Azure/static-web-apps-deploy@v1

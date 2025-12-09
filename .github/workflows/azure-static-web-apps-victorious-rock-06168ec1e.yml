@@ -19,6 +19,14 @@ jobs:
         with:
           submodules: true
           lfs: false
+      - name: Vérifier index.html
+        run: |
+          echo "=== Checking index.html title ==="
+          grep -o "<title>.*</title>" public/index.html
+          echo "=== File size ==="
+          ls -lh public/index.html
+          echo "=== version.json ==="
+          cat configs/version.json || echo "version.json not found"
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
