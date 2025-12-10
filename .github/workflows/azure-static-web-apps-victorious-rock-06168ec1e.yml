@@ -19,7 +19,7 @@ jobs:
         with:
           submodules: true
           lfs: false
-      - name: Vérifier index.html
+      - name: Vérifier index.html et structure
         run: |
           echo "=== Checking index.html title ==="
           grep -o "<title>.*</title>" public/index.html
@@ -27,20 +27,38 @@ jobs:
           ls -lh public/index.html
           echo "=== version.json ==="
           cat configs/version.json || echo "version.json not found"
+          echo "=== API structure ==="
+          ls -la api/api/invoke/ 2>/dev/null | head -5 || echo "API functions found"
+          echo "=== Public files ==="
+          ls -la public/ | head -10
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_VICTORIOUS_ROCK_06168EC1E }}
-          repo_token: ${{ secrets.GITHUB_TOKEN }} # Used for Github integrations (i.e. PR comments)
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: "upload"
-          ###### Repository/Build Configurations - These values can be configured to match your app requirements. ######
-          # For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
-          app_location: "public" # App source code path
-          api_location: "api" # Api source code path - optional
-          output_location: "" # Built app content directory - optional
+          app_location: "public"
+          api_location: "api"
+          output_location: ""
           skip_app_build: true
-          ###### End of Repository/Build Configurations ######
+      - name: Deployment Summary
+        if: always()
+        run: |
+          echo "🚀 Deployment Summary"
+          echo "====================="
+          echo "Deployment Status: ${{ job.status }}"
+          echo "App Location: public"
+          echo "API Location: api"
+          echo "Token Status: $([ -z '${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_VICTORIOUS_ROCK_06168EC1E }}' ] && echo '❌ NOT SET' || echo '✅ CONFIGURED')"
+          echo ""
+          echo "If deployment failed, check:"
+          echo "1. Secret AZURE_STATIC_WEB_APPS_API_TOKEN_VICTORIOUS_ROCK_06168EC1E exists and is valid"
+          echo "2. Azure Static Web App name is 'victorious-rock-06168ec1e'"
+          echo "3. Paths: public/ and api/ exist in repo"
+          if [ "${{ job.status }}" == "success" ]; then
+            echo "✅ Deployment successful! Check https://portal.azure.com"
+          fi
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
