@@ -65,13 +65,17 @@ Les paramètres déjà présents dans Azure doivent être supprimés manuellemen
    - ❌ `WEBSITE_NODE_DEFAULT_VERSION` (si présent)
 5. Cliquer sur **"Save"**
 
-#### Option B : Via Azure CLI
+#### Option B : Via Azure CLI (Script Automatique)
+
+Le repository inclut un script de nettoyage automatique :
 
 ```bash
 # Exécuter le script de nettoyage
 cd scripts/
 ./fix-azure-settings.sh
 ```
+
+Ce script supprime automatiquement tous les paramètres interdits via Azure CLI.
 
 ### Étape 2 : Déployer la Nouvelle Version
 
@@ -98,7 +102,8 @@ Après le déploiement (attendre 2-3 minutes) :
 
 2. Vérifier que l'application fonctionne :
    ```bash
-   curl https://votre-app.azurestaticapps.net/api/agents/axilum/invoke
+   # Remplacez <votre-app> par le nom de votre Static Web App
+   curl https://<votre-app>.azurestaticapps.net/api/agents/axilum/invoke
    ```
 
 ## 🎉 Résultat Attendu
