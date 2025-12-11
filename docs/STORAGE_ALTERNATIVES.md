@@ -69,7 +69,7 @@ az storage account show-connection-string \
   }
 }
 ```
-⚠️ **Note**: `FUNCTIONS_WORKER_RUNTIME` ne doit pas être ajouté - il est interdit sur Azure Static Web Apps.
+⚠️ **Note**: Ne pas ajouter `FUNCTIONS_WORKER_RUNTIME` - ce paramètre est interdit sur Azure Static Web Apps.
 
 **Azure Portal** :
 1. Allez sur votre Static Web App
