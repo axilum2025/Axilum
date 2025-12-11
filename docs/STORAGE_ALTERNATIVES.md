@@ -64,12 +64,12 @@ az storage account show-connection-string \
 {
   "IsEncrypted": false,
   "Values": {
-    "FUNCTIONS_WORKER_RUNTIME": "node",
     "AZURE_AI_API_KEY": "[REDACTED_AZURE_AI_API_KEY]",
     "AZURE_STORAGE_CONNECTION_STRING": "DefaultEndpointsProtocol=https;AccountName=axilumaistorage;AccountKey=[REDACTED];EndpointSuffix=core.windows.net"
   }
 }
 ```
+⚠️ **Note**: Ne pas ajouter `FUNCTIONS_WORKER_RUNTIME` - ce paramètre est interdit sur Azure Static Web Apps.
 
 **Azure Portal** :
 1. Allez sur votre Static Web App

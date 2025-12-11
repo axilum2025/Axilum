@@ -87,13 +87,12 @@ Ajoutez la connection string locale :
 {
   "IsEncrypted": false,
   "Values": {
-    "AzureWebJobsStorage": "",
-    "FUNCTIONS_WORKER_RUNTIME": "node",
     "AZURE_AI_API_KEY": "[REDACTED_AZURE_AI_API_KEY]",
     "AZURE_STORAGE_CONNECTION_STRING": "DefaultEndpointsProtocol=https;AccountName=axilumaistorage;AccountKey=[REDACTED];EndpointSuffix=core.windows.net"
   }
 }
 ```
+⚠️ **Important**: Ne pas ajouter `AzureWebJobsStorage` ou `FUNCTIONS_WORKER_RUNTIME` - ces paramètres sont interdits sur Azure Static Web Apps.
 
 ⚠️ **Important** : Ce fichier est dans `.gitignore`, ne le commitez jamais !
 
