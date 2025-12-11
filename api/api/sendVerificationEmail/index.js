@@ -53,7 +53,7 @@ module.exports = async function (context, req) {
         const senderAddress = process.env.AZURE_COMMUNICATION_SENDER || "DoNotReply@azurecomm.net";
         
         const emailMessage = {
-            sender: senderAddress,
+            senderAddress: senderAddress,
             content: {
                 subject: "Code de vérification Axilum AI",
                 plainText: `Bonjour ${name || 'utilisateur'},\n\nVotre code de vérification est : ${verificationCode}\n\nCe code expire dans 15 minutes.\n\nSi vous n'avez pas demandé ce code, ignorez cet email.\n\nCordialement,\nL'équipe Axilum AI`,
